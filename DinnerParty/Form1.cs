@@ -26,5 +26,29 @@ namespace DinnerParty
         {
 
         }
+
+        private void DisplayDinnerPartyCost()
+        {
+            decimal Cost = dinnerParty.CalculateCost(checkBox2.Checked);
+            label3.Text = Cost.ToString("c");
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            dinnerParty.NumberOfPeople = (int) numericUpDown1.Value;
+            DisplayDinnerPartyCost();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            dinnerParty.CalculateCostOfDecorations(true);
+            DisplayDinnerPartyCost();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            dinnerParty.SetHealtyhyOption(true);
+            DisplayDinnerPartyCost();
+        }
     }
 }

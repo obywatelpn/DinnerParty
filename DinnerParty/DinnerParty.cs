@@ -9,18 +9,26 @@ namespace DinnerParty
     class DinnerParty
     {
         public int NumberOfPeople;
-        public const decimal CostOfBeveragesPerPerson = 25.0M;
-        private decimal CostOfDecorations;
+        public decimal CostOfBeveragesPerPerson;
+        public const decimal CostOfFoodPerPerson = 25.0M;
+        private decimal CostOfDecorations = 0;
         private bool HealthyOption;
+        
 
 
         public void CalculateCostOfDecorations(bool fantasyDecorations)
         {
         }
         public  void SetHealtyhyOption(bool healthyOption) { }
-        public decimal CalculateCost()
+        public decimal CalculateCost(bool healthyOption)
         {
-            return 0M;
+            decimal totalCostDecimal = CostOfDecorations +
+                                       ((CostOfBeveragesPerPerson + CostOfFoodPerPerson)*NumberOfPeople);
+            if (healthyOption)
+            {
+                return totalCostDecimal * 0.95M;
+            }
+            else return totalCostDecimal;
         }
     }
 }
