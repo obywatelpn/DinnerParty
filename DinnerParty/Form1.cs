@@ -12,13 +12,13 @@ namespace DinnerParty
 {
     public partial class Form1 : Form
     {
-        private DinnerParty dinnerParty;
+        private readonly DinnerParty _dinnerParty;
         public Form1()
         {
             InitializeComponent();
-            dinnerParty = new DinnerParty() {NumberOfPeople = 5};
-            dinnerParty.SetHealtyhyOption(false);
-            dinnerParty.CalculateCostOfDecorations(true);
+            _dinnerParty = new DinnerParty((int)numericUpDown1.Value, checkBox1.Checked, checkBox2.Checked);
+            _dinnerParty.SetHealtyhyOption(false);
+            _dinnerParty.CalculateCostOfDecorations(true);
             DisplayDinnerPartyCost();
         }
 
@@ -29,25 +29,26 @@ namespace DinnerParty
 
         private void DisplayDinnerPartyCost()
         {
-            decimal Cost = dinnerParty.CalculateCost(checkBox2.Checked);
-            label3.Text = Cost.ToString("c");
+            decimal cost = _dinnerParty.CalculateCost();
+            label3.Text = cost.ToString("c");
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            dinnerParty.NumberOfPeople = (int) numericUpDown1.Value;
+            _dinnerParty.NumberOfPeople = (int)numericUpDown1.Value;
+            _dinnerParty.SetPartyOptions((int) numericUpDown1.Value, checkBox1.Checked, checkBox2.Checked);
             DisplayDinnerPartyCost();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            dinnerParty.CalculateCostOfDecorations(true);
+            _dinnerParty.CalculateCostOfDecorations(checkBox1.Checked);
             DisplayDinnerPartyCost();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            dinnerParty.SetHealtyhyOption(true);
+            _dinnerParty.SetHealtyhyOption(checkBox2.Checked);
             DisplayDinnerPartyCost();
         }
     }
