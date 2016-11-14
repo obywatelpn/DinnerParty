@@ -81,6 +81,10 @@ namespace DinnerParty
         }
         public decimal CalculateCost()
         {
+            if (NumberOfPeople > 12)
+            {
+                return ((NumberOfPeople*25) + _fantasyDecorationsCost + _cakeCost + (CakeWriting.Length*0.25M)) + 100M;
+            }
             return (NumberOfPeople*25) + _fantasyDecorationsCost + _cakeCost + (CakeWriting.Length*0.25M);
         }
     }

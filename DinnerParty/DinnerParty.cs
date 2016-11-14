@@ -54,8 +54,13 @@ namespace DinnerParty
         }
         public decimal CalculateCost()
         {
+            
             decimal totalCostDecimal = _costOfDecorations +
                                        ((_costOfBeveragesPerPerson + CostOfFoodPerPerson)*this.NumberOfPeople);
+            if (NumberOfPeople > 12)
+            {
+                totalCostDecimal = totalCostDecimal + 100M;
+            }
             if (this._healthyOption)
             {
                 return totalCostDecimal * 0.95M;
