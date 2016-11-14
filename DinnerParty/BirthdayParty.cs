@@ -10,12 +10,22 @@ namespace DinnerParty
     class BirthdayParty
     {
         private string cakeWriting = "";
-        public int CakeSize { get; set; }
+        private decimal _numberOfPeople;
+        private decimal _fantasyDecorationsCost;
+        private decimal _cakeCost;
 
+        public BirthdayParty(decimal numberOfPersons, bool fantasyDecorations, string cakeWriting)
+        {
+            this.NumberOfPeople = numberOfPersons;
+            CalculateCostOfDecorations(fantasyDecorations);
+            this.CakeWriting = cakeWriting;
+
+        }
+        public int CakeSize { get; set; }
         public string CakeWriting
         {
             get { return this.cakeWriting; }
-            private set
+            set
             {
                 int maxLength;
                 if (CakeSize == 20)
@@ -39,21 +49,39 @@ namespace DinnerParty
 
         public decimal NumberOfPeople
         {
-            get { return NumberOfPeople; }
-            set { CalculateCakeSize(); }
+            get { return _numberOfPeople; }
+            set
+            {
+                _numberOfPeople = value;
+                CalculateCakeSize();
+            }
         }
 
         private void CalculateCakeSize()
         {
-            switch (numberOfPersons)
+            if (_numberOfPeople <= 4)
             {
-                case 20:
-                    CakeSize = 20;
-                    break;
-                case 40:
-                    CakeSize = 40;
-                    break;
+                CakeSize = 20;
+                _cakeCost = 40M;
             }
+            else if (_numberOfPeople > 4)
+            {
+                CakeSize = 40;
+                _cakeCost = 75M;
+            }
+        }
+
+        public void CalculateCostOfDecorations(bool fantasyDecorations)
+        {
+            if (fantasyDecorations)
+            {
+                this._fantasyDecorationsCost= NumberOfPeople*15M + 50M;
+            }
+            else this._fantasyDecorationsCost = NumberOfPeople *7.5M + 30M;
+        }
+        public decimal CalculateCost()
+        {
+            return (NumberOfPeople*25) + _fantasyDecorationsCost + _cakeCost + (CakeWriting.Length*0.25M);
         }
     }
 }

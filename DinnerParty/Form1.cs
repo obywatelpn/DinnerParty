@@ -13,18 +13,16 @@ namespace DinnerParty
     public partial class Form1 : Form
     {
         private readonly DinnerParty _dinnerParty;
+        private readonly BirthdayParty _birthdayParty;
         public Form1()
         {
             InitializeComponent();
             _dinnerParty = new DinnerParty((int)numericUpDown1.Value, checkBox1.Checked, checkBox2.Checked);
+            _birthdayParty= new BirthdayParty(numericUpDown2.Value, checkBox3.Checked, textBox1.Text);
             _dinnerParty.SetHealtyhyOption(false);
             _dinnerParty.CalculateCostOfDecorations(true);
             DisplayDinnerPartyCost();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            DisplayBirthdayPartyCost();
         }
 
         private void DisplayDinnerPartyCost()
@@ -32,7 +30,11 @@ namespace DinnerParty
             decimal cost = _dinnerParty.CalculateCost();
             label3.Text = cost.ToString("c");
         }
-
+        private void DisplayBirthdayPartyCost()
+        {
+            decimal cost = _birthdayParty.CalculateCost();
+            label5.Text = cost.ToString("c");
+        }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             _dinnerParty.NumberOfPeople = (int)numericUpDown1.Value;
@@ -52,34 +54,25 @@ namespace DinnerParty
             DisplayDinnerPartyCost();
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-
+            _birthdayParty.NumberOfPeople = (int) numericUpDown2.Value;
+            _birthdayParty.CakeWriting = textBox1.Text;
+            textBox1.Text = _birthdayParty.CakeWriting;
+            DisplayBirthdayPartyCost();
         }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
+     
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-
+            _birthdayParty.CalculateCostOfDecorations(checkBox3.Checked);
+            DisplayBirthdayPartyCost();
         }
 
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            _birthdayParty.CakeWriting = textBox1.Text;
+            textBox1.Text = _birthdayParty.CakeWriting;
+            DisplayBirthdayPartyCost();
         }
     }
 }

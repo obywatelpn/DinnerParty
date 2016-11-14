@@ -37,13 +37,13 @@
             this.tabOkol = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabOkol.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -165,10 +165,27 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(173, 176);
+            this.tabPage2.Size = new System.Drawing.Size(230, 176);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Impreza urodzinowa";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(8, 89);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(157, 20);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 73);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(78, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Napis na torcie";
             // 
             // label4
             // 
@@ -178,7 +195,6 @@
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Ilość osób";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -187,7 +203,6 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 22);
             this.label5.TabIndex = 9;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // numericUpDown2
             // 
@@ -220,7 +235,6 @@
             this.label6.Size = new System.Drawing.Size(33, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Koszt";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // checkBox3
             // 
@@ -235,22 +249,6 @@
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 73);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Napis na torcie";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(8, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(157, 20);
-            this.textBox1.TabIndex = 12;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,7 +258,6 @@
             this.Controls.Add(this.tabOkol);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabOkol.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
