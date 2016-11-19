@@ -7,24 +7,34 @@ using System.Windows.Forms;
 
 namespace DinnerParty
 {
-    class BirthdayParty
+    public class BirthdayParty:Party
     {
-        private string cakeWriting = "";
-        private decimal _numberOfPeople;
-        private decimal _fantasyDecorationsCost;
-        private decimal _cakeCost;
+        public int CakeSize;
+        private string _cakeWriting = "";
 
-        public BirthdayParty(decimal numberOfPersons, bool fantasyDecorations, string cakeWriting)
+        public BirthdayParty(int numberOfPersons, bool fantasyDecorations, string cakeWriting)
+            :base(numberOfPersons, fantasyDecorations)
         {
-            this.NumberOfPeople = numberOfPersons;
-            CalculateCostOfDecorations(fantasyDecorations);
+            CalculateCakeSize();
             this.CakeWriting = cakeWriting;
+            CalculateCostOfDecorations(fantasyDecorations);
 
         }
-        public int CakeSize { get; set; }
+
+        public override int NumberOfPeople
+        {
+            get { return base.NumberOfPeople; }
+            set
+            {
+                base.NumberOfPeople = value;
+                CalculateCakeSize();
+                this.CakeWriting = _cakeWriting;
+            }
+        }
+
         public string CakeWriting
         {
-            get { return this.cakeWriting; }
+            get { return this._cakeWriting; }
             set
             {
                 int maxLength;
@@ -37,55 +47,33 @@ namespace DinnerParty
                 if (value.Length > maxLength)
                 {
                     MessageBox.Show("Za dużo liter dla " + CakeSize + "-centymetrowego tortu");
-                    if (maxLength > this.cakeWriting.Length)
+                    if (maxLength > this._cakeWriting.Length)
                     {
-                        maxLength = this.cakeWriting.Length;
+                        maxLength = this._cakeWriting.Length;
                     }
-                    this.cakeWriting = cakeWriting.Substring(0, maxLength);
+                    this._cakeWriting = _cakeWriting.Substring(0, maxLength);
                 }
-                else this.cakeWriting = value;
-            }
-        }
-
-        public decimal NumberOfPeople
-        {
-            get { return _numberOfPeople; }
-            set
-            {
-                _numberOfPeople = value;
-                CalculateCakeSize();
+                else this._cakeWriting = value;
             }
         }
 
         private void CalculateCakeSize()
         {
-            if (_numberOfPeople <= 4)
-            {
-                CakeSize = 20;
-                _cakeCost = 40M;
-            }
-            else if (_numberOfPeople > 4)
-            {
-                CakeSize = 40;
-                _cakeCost = 75M;
-            }
+            CakeSize = NumberOfPeople <= 4 ? 20 : 40;
         }
 
-        public void CalculateCostOfDecorations(bool fantasyDecorations)
+        public override decimal CalculateCost()
         {
-            if (fantasyDecorations)
+            decimal cakeCost;
+            if (CakeSize==8)
             {
-                this._fantasyDecorationsCost= NumberOfPeople*15M + 50M;
+                cakeCost = 40M + CakeWriting.Length*0.25M;
             }
-            else this._fantasyDecorationsCost = NumberOfPeople *7.5M + 30M;
-        }
-        public decimal CalculateCost()
-        {
-            if (NumberOfPeople > 12)
+            else
             {
-                return ((NumberOfPeople*25) + _fantasyDecorationsCost + _cakeCost + (CakeWriting.Length*0.25M)) + 100M;
+                cakeCost = 75M + CakeWriting.Length*0.25M;
             }
-            return (NumberOfPeople*25) + _fantasyDecorationsCost + _cakeCost + (CakeWriting.Length*0.25M);
+            return base.CalculateCost() + cakeCost;
         }
     }
 }

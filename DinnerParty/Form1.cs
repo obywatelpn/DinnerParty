@@ -18,7 +18,7 @@ namespace DinnerParty
         {
             InitializeComponent();
             _dinnerParty = new DinnerParty((int)numericUpDown1.Value, checkBox1.Checked, checkBox2.Checked);
-            _birthdayParty= new BirthdayParty(numericUpDown2.Value, checkBox3.Checked, textBox1.Text);
+            _birthdayParty= new BirthdayParty((int)numericUpDown2.Value, checkBox3.Checked, textBox1.Text);
             _dinnerParty.SetHealtyhyOption(false);
             _dinnerParty.CalculateCostOfDecorations(true);
             DisplayDinnerPartyCost();
